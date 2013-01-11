@@ -251,10 +251,11 @@
 			if ( mousing )
 			{
 				$list.find('a').off( tap_evt, handleTap );
+				return TRUE;
 			}
 			
 			// cancel
-			if ( mousing || dragging )
+			if ( dragging )
 			{
 				dragging = FALSE;
 				return FALSE;
