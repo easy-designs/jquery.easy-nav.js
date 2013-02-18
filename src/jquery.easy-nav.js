@@ -248,7 +248,8 @@
 				vertical = ( display == 'block' || display == 'list-item' ) && ! floating;
 			
 			// when mousing, we don’t need this (it just gets in the way)
-			if ( mousing )
+			if ( mousing &&
+				 window.location.hash != '#' + $list.attr('id') )
 			{
 				$list.find('a').off( tap_evt, handleTap );
 				return TRUE;
