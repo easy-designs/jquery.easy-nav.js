@@ -194,10 +194,11 @@
 				$nav_items = $list.children( LI ),
 				$primary_links;
 			
-			if ( id )
+			if ( ! id )
 			{
-				ids.push( id );
+				id = $list.closest('[id]').attr('id');
 			}
+			ids.push( id );
 			
 			if ( $nav_items.length )
 			{
@@ -207,7 +208,8 @@
 									 )
 									.filter(':not([href=#top])')
 									.filter(function(){
-										return $(this).next().is( LISTS );
+										var $curr = $(this);
+										return $curr.next().is( LISTS ) || $curr.parent().next().is( LISTS );
 									 })
 									.addClass( DISABLED );
 			}
@@ -249,7 +251,7 @@
 			
 			// when mousing, we don’t need this (it just gets in the way)
 			if ( mousing &&
-				 window.location.hash != '#' + $list.attr('id') )
+				 $.inArray( window.location.hash.replace('#',''), ids ) < 0 )
 			{
 				$list.find('a').off( tap_evt, handleTap );
 				return TRUE;
